@@ -14,9 +14,4 @@
 			</intent-filter>
 		</activity>
 	</application>
-	<queries>
-		<intent>
-			<action android:name="android.intent.action.OPEN_DOCUMENT_TREE" />
-		</intent>
-	</queries>
 </manifest>

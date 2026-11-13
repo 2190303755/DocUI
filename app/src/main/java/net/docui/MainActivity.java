@@ -1,9 +1,9 @@
 package net.docui;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.util.Log;
 
 public class MainActivity extends Activity {
@@ -11,13 +11,12 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		try {
-			startActivity(new Intent(Intent.ACTION_MAIN).setComponent(new ComponentName(
-					new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).resolveActivity(this.getPackageManager()).getPackageName(),
-					"com.android.documentsui.files.FilesActivity"
-			)));
+			this.startActivity(new Intent(Intent.ACTION_VIEW)
+					.setType(DocumentsContract.Document.MIME_TYPE_DIR)
+			);
 		} catch (Exception e) {
-			Log.i("DocumentsUI", e.getMessage());
+			Log.w("DocumentsUI", "Failed to launch DocumentsUI", e);
 		}
-		this.finish();
+		this.finishAndRemoveTask();
 	}
 }
